@@ -20,7 +20,7 @@ def stub_view(request, *args, **kwargs):
 
 
 class PostListView(ListView):
-    model = Post
+    queryset = Post.objects.exclude(published_date__exact=None).order_by("-published_date")
     template_name = 'blogging/list.html'
 
 
@@ -34,16 +34,16 @@ class PostListView(ListView):
 #     return render(request, 'blogging/list.html', context)
 
 class PostDetailView(DetailView):
-    model = Post
-    template_engine = 'blogging/detail.html'
+    queryset = Post.objects.exclude(published_date__exact=None)
+    template_name = 'blogging/detail.html'
 
-    def publish(self, request, post_id):
-        # def detail_view(request, post_id):
-        blog = self.get_object()
-        published = blog.objects.exclude(published_date__exact=None)
-        try:
-            post = published.get(pk=post_id)
-        except Post.DoesNotExist:
-            raise Http404
-        context = {'post': post}
-        return render(request, 'blogging/detail.html', context)
+    # def publish(self, request, *args, **kwargs):
+    #     # def detail_view(request, post_id):
+    #     blog = self.get_object()
+    #     published = blog.objects.exclude(published_date__exact=None)
+    #     try:
+    #         post = published.get(pk=blog.post_id)
+    #     except Post.DoesNotExist:
+    #         raise Http404
+    #     context = {"posts": post}
+    #     return render(request, 'blogging/detail.html', context)
