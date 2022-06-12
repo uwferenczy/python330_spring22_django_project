@@ -4,8 +4,7 @@ from .settings import *
 
 DATABASES = {
     "default": dj_database_url.config(
-        default = "sqlite:///"+os.path.join(BASE_DIR,"db.sqlite3")
-
+        default="sqlite:///" + os.path.join(BASE_DIR, "db.sqlite3")
     )
 }
 
@@ -15,7 +14,4 @@ STATIC_ROOT = os.path.join(BASE_DIR, "static")
 SECRET_KEY = os.environ.get("SECRET_KEY")
 ALLOWED_HOSTS = ["*"]
 
-MIDDLEWARE = (
-    "whitenoise.middlewear.WhiteNoiseMiddelware",
-    *MIDDLEWARE
-)
+MIDDLEWARE = ("whitenoise.middlewear.WhiteNoiseMiddelware", *MIDDLEWARE)
