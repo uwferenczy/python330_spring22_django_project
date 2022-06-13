@@ -1,4 +1,3 @@
-﻿﻿asgiref==3.5.1
 black==22.3.0
 Django==4.0.4
 polling==0.3.2
